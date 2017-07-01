@@ -1,18 +1,22 @@
-initAccordion('accordion', 'accordion-title', 'active');
+initAccordion('.accordion', '.accordion-title', '.active');
 
 function initAccordion(parentClass, titleClass, activeClass) {
-  var mainArr = document.querySelectorAll('.' + parentClass);
+  var mainArr = document.querySelectorAll(parentClass);
+  activeClass = activeClass.slice(1);
 
   mainArr.forEach(function (mainElem) {
     mainElem.addEventListener('click', function (e) {
-      var titlesArr = mainElem.querySelectorAll('.' + titleClass);
+      var titlesArr = mainElem.querySelectorAll(titleClass);
+
       var newElemClassesArr, newThatClassesArr;
       var that = e.target;
 
       // if click on title  - begin
-      if (that.className.indexOf(titleClass) !== -1) {
+      if (that.className.indexOf(titleClass.slice(1)) !== -1) {
+        console.log('here');
+
         var thatClassesArr = that.className.split(' ');
-        var thatIndexActive= thatClassesArr.indexOf(activeClass);
+        var thatIndexActive = thatClassesArr.indexOf(activeClass);
         // if elem-target has class active - remove it
         if (thatIndexActive !== -1) {
           thatClassesArr.splice(thatIndexActive, 1);
