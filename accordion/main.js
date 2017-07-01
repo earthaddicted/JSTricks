@@ -33,7 +33,7 @@ function initAccordion(parentClass, titleClass, accClass) {
         setNewClasses(newThatClassesArr, thatClassesArr, that);
       }
     });
-  })
+  });
 
   function setNewClasses(newClasses, array, element) {
     newClasses = array.join(' ');
