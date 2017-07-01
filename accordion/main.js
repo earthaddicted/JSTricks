@@ -1,31 +1,41 @@
-var titles = document.querySelectorAll('.accordion-title');
+function initAccordion(parentClass, titleClass, accClass) {
+  var mainArr = document.querySelectorAll('.' + parentClass);
 
-function initAccordion(accClass) {
-    titles.forEach(function (elem, index, array) {
-        var newClassesActive, innerNewClasses;
-        elem.addEventListener('click', function () {
-            var classesArr = elem.getAttribute('class').split(' ');
-            var activeIndex = classesArr.indexOf(accClass);
-            // remove class active for all
-            array.forEach(function (innerElem) {
-                var innerClassesArr = innerElem.getAttribute('class').split(' ');
-                var innerActiveIndex = innerClassesArr.indexOf(accClass);
-                if (innerActiveIndex !== -1) {
-                    innerClassesArr.splice(innerActiveIndex, 1);
-                    setNewClasses(innerNewClasses, innerClassesArr, innerElem);
-                }
-            });
-            // add class active for elem
-            if (activeIndex === -1) {
-                classesArr.push(accClass);
-                setNewClasses(newClassesActive, classesArr, elem);
+  mainArr.forEach(function (mainElem) {
+    mainElem.addEventListener('click', function (e) {
+      var titlesArr = mainElem.querySelectorAll('.' + titleClass);
+      var innerNewClassesArr, newThatClassesArr;
+      var that = e.target;
+
+      // if click on title  - begin
+      if (that.className.indexOf(titleClass) !== -1) {
+        var thatClassesArr = that.className.split(' ');
+        var thatIndexActive= thatClassesArr.indexOf(accClass);
+        // if elem-target has class active - remove it
+        if (thatIndexActive !== -1) {
+          thatClassesArr.splice(thatIndexActive, 1);
+        }
+        else {
+          // remove class active for all
+          titlesArr.forEach(function (elem, index, array) {
+            var classArr = elem.className.split(' ');
+            var indexElActive = classArr.indexOf(accClass);
+            if (indexElActive !== -1) {
+              classArr.splice(indexElActive, 1);
+              setNewClasses(innerNewClassesArr, classArr, elem);
             }
-        });
+          });
+          thatClassesArr.push(accClass);
+        }
+        //add class active elem-target
+        setNewClasses(newThatClassesArr, thatClassesArr, that);
+      }
     });
+  })
 
-    function setNewClasses(newClasses, array, element) {
-        newClasses = array.join(' ');
-        element.setAttribute('class', newClasses);
-    }
+  function setNewClasses(newClasses, array, element) {
+    newClasses = array.join(' ');
+    element.setAttribute('class', newClasses);
+  }
 }
-initAccordion('active');
+initAccordion('accordion', 'accordion-title', 'active');
