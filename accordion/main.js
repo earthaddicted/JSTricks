@@ -6,7 +6,7 @@ function initAccordion(parentClass, titleClass, activeClass) {
   mainArr.forEach(function (mainElem) {
     mainElem.addEventListener('click', function (e) {
       var titlesArr = mainElem.querySelectorAll('.' + titleClass);
-      var innerNewClassesArr, newThatClassesArr;
+      var newElemClassesArr, newThatClassesArr;
       var that = e.target;
 
       // if click on title  - begin
@@ -24,7 +24,7 @@ function initAccordion(parentClass, titleClass, activeClass) {
             var indexElActive = classArr.indexOf(activeClass);
             if (indexElActive !== -1) {
               classArr.splice(indexElActive, 1);
-              setNewClasses(innerNewClassesArr, classArr, elem);
+              setNewClasses(newElemClassesArr, classArr, elem);
             }
           });
           thatClassesArr.push(activeClass);
