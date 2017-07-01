@@ -1,3 +1,5 @@
+initAccordion('accordion', 'accordion-title', 'active');
+
 function initAccordion(parentClass, titleClass, accClass) {
   var mainArr = document.querySelectorAll('.' + parentClass);
 
@@ -38,4 +40,4 @@ function initAccordion(parentClass, titleClass, accClass) {
     element.setAttribute('class', newClasses);
   }
 }
-initAccordion('accordion', 'accordion-title', 'active');
+
